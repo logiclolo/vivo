@@ -1,0 +1,27 @@
+<div id="tabs_localstorage">
+      
+      <%= f.label :localstorage_manageable, "有無支援manageable localstorage" %>
+      <%= f.radio_button :localstorage_manageable, '1' %> 有
+      <%= f.radio_button :localstorage_manageable, '0' %> 無
+      <br>  
+      <%= f.label :localstorage_seamless, "有無支援seamless" %>
+      <%= f.radio_button :localstorage_seamless, '1' %> 有
+      <%= f.radio_button :localstorage_seamless, '0' %> 無
+      <br>       
+      <%= f.label :localstorage_slconnum, "支援的最大 seamless connection number" %>
+      <%= f.text_field :localstorage_slconnum %>
+      <br>       
+      <%= f.label :localstorage_modnum, "支援的最大 MOD connection numbers" %>
+      <%= f.text_field :localstorage_modnum %>
+      <br>      
+      <%= f.label :localstorage_modversion, "modversion" %>
+      <%= f.text_field :localstorage_modversion %>
+      <br>        
+      <%= f.label :localstorage_stormgrversio, "stormgrversion" %>
+      <%= f.text_field :localstorage_stormgrversio %>
+      <br>  
+      <%= f.label :localstorage_supportedge, "有無支援Edge" %>
+      <%= f.radio_button :localstorage_supportedge, '1' %> 有
+      <%= f.radio_button :localstorage_supportedge, '0' %> 無      
+      <br>         
+</div> 

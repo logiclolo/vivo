@@ -1,0 +1,31 @@
+<div id="tabs_audio", class="content_block">
+      <%= f.label :naudioin, "Audioin 數目" %>
+      <%= f.text_field :naudioin %>
+      <br>  
+      <%= f.label :naudioout, "Audioout 數目" %>
+      <%= f.text_field :naudioout %>    
+      <br>  
+      <%= f.label :audio_intmic, "有無內建麥克風" %>
+      <%= f.radio_button :audio_intmic, '1' %> 有
+      <%= f.radio_button :audio_intmic, '0' %> 無
+      <br>  
+      <%= f.label :audio_extmic, "有無外接麥克風" %>
+      <%= f.radio_button :audio_extmic, '1' %> 有
+      <%= f.radio_button :audio_extmic, '0' %> 無
+      <br>    
+      <%= f.label :audio_aec, "有無回音消除功能" %>
+      <%= f.radio_button :audio_aec, '1' %> 有
+      <%= f.radio_button :audio_aec, '0' %> 無
+      <br>       
+      <%= f.label :audio_michardwareswitch, "有實體切換mic的按鈕" %>
+      <%= f.radio_button :audio_michardwareswitch, '1' %> 有
+      <%= f.radio_button :audio_michardwareswitch, '0' %> 無
+      <br>           
+      <%= f.label :audioin_codec_aac4, "audioin 支援的codec" %>
+      <%= f.check_box :audioin_codec_aac4 %> aac4
+      <%= f.check_box :audioin_codec_g711 %> g711
+      <%= f.check_box :audioin_codec_g726 %> g726
+      <br>
+      <%= f.label :audioout_codec_g711, "audioout 支援的codec" %>
+      <%= f.check_box :audioout_codec_g711 %> g711
+</div>  

@@ -1,0 +1,24 @@
+<div id="tabs_vadp">
+      
+      <%= f.label :audioin_codec_aac4, "支援的VADP功能" %>
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit0 %> VADP interface
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit1 %> Capture video raw data
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit2 %> Support encode jpeg
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit3 %> Capture audio raw data
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit4 %> Support event trigger
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit5 %> Support license registration
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit6 %> Support shared memory API
+      <br>
+      <%= f.check_box :vadp_supportfeature_bit7 %> Support digital signature of package
+      <br>    
+      <%= f.label :vadp_npackage, "上傳之最大VADP Package 數目" %>
+      <%= f.text_field :vadp_npackage %>    
+      <br>  
+</div> 

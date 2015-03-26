@@ -18,10 +18,10 @@ class VivocamerasController < ApplicationController
   def create
     @vivocamera = Vivocamera.new(vivocamera_params)
      @vivocamera.save
-      flash[:success] = "IP camera successful created!"
+      flash[:success] = "IP camera successful created! #{@vivocamera.id} #{@vivocamera.importid}"
        
        
-     redirect_to :controller => :vivocamera_userinputs, :action => :new, :vivocamera_id => @vivocamera.id
+     redirect_to :controller => :vivocamera_userinputs, :action => :new, :vivocamera_id => @vivocamera.id, :importid=>@vivocamera.importid
   
   end
 
@@ -37,12 +37,17 @@ class VivocamerasController < ApplicationController
       redirect_to cameraindex_path
    
  end
+ 
+ def download
+    @filePath = "downloads/#{params[:vivocamera_name]}_#{params[:vivocamera_id]}.tar.gz"
+    send_file @filePath, :x_sendfile=>true
+ end
   
 
   private
 
     def vivocamera_params
-      params.require(:vivocamera).permit(:name)
+      params.require(:vivocamera).permit(:name, :importid)
     end
 
   

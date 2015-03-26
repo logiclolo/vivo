@@ -1,0 +1,33 @@
+<div id="tabs_smartstream">
+      
+      <%= f.label :smartstream_support, "有無smartstream" %>
+      <%= f.radio_button :smartstream_support, '1' %> 有
+      <%= f.radio_button :smartstream_support, '0' %> 無
+      <br>  
+      <%= f.label :smartstream_nstream, "支援的smart stream 串流數目" %>
+      <%= f.text_field :smartstream_nstream %>
+      <br>           
+      <%= f.label :smartstream_mode_autotracking, "有無支援autotracking" %>
+      <%= f.radio_button :smartstream_mode_autotracking, '1' %> 有
+      <%= f.radio_button :smartstream_mode_autotracking, '0' %> 無
+      <br>
+      <%= f.label :smartstream_nwindow_autotracking, "autotracking window數目" %>
+      <%= f.text_field :smartstream_nwindow_autotracking %>
+      <br>      
+      <%= f.label :smartstream_mode_manual, "有無支援手調視窗模式" %>
+      <%= f.radio_button :smartstream_mode_manual, '1' %> 有
+      <%= f.radio_button :smartstream_mode_manual, '0' %> 無
+      <br>
+      <%= f.label :smartstream_nwindow_manual, "手調視窗數目" %>
+      <%= f.text_field :smartstream_nwindow_manual %>
+      <br>         
+      <%= f.label :smartstream_mode_hybrid, "有無支援混合模式" %>
+      <%= f.radio_button :smartstream_mode_hybrid, '1' %> 有
+      <%= f.radio_button :smartstream_mode_hybrid, '0' %> 無
+      <br>
+      <%= f.label :smartstream_nwindow_hybrid_autotracking, "混合模式autotracking視窗數目" %>
+      <%= f.text_field :smartstream_nwindow_hybrid_autotracking %>
+      <%= f.label :smartstream_nwindow_hybrid_manual, "混合模式手調視窗數目" %>
+      <%= f.text_field :smartstream_nwindow_hybrid_manual %>
+      <br>         
+</div> 

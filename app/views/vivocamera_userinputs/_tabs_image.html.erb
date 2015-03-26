@@ -1,0 +1,28 @@
+<div id="tabs_image">
+      
+      <%= f.label :image_c0_sensor_type, "sensor 型號" %>
+      <%= f.radio_button :image_c0_sensor_type, 'imx123' ,:checked => true%> imx123
+      <%= f.radio_button :image_c0_sensor_type, 'imx103' %> imx103
+      <%= f.radio_button :image_c0_sensor_type, 'ov5658' %> ov5658
+      <br>
+      
+      <%= f.label :image_c0_backfocus, "有無backfocus" %>
+      <%= f.radio_button :image_c0_backfocus, '1' %> 有
+      <%= f.radio_button :image_c0_backfocus, '0' %> 無
+      <br>  
+      <%= f.label :image_c0_focusassist, "有無focusassist" %>
+      <%= f.radio_button :image_c0_focusassist, '1' %> 有
+      <%= f.radio_button :image_c0_focusassist, '0' %> 無
+      <br>      
+      <%= f.label :image_c0_remotefocus, "有無remotefocus" %>
+      <%= f.radio_button :image_c0_remotefocus, '1' %> 有
+      <%= f.radio_button :image_c0_remotefocus, '0' %> 無
+      <br>  
+      <%= f.label :image_c0_eis, "有無eis" %>
+      <%= f.radio_button :image_c0_eis, '1' %> 有
+      <%= f.radio_button :image_c0_eis, '0' %> 無
+      <br>        
+      <%= f.label :image_c0_dnr, "有無DNR" %>
+      <%= f.radio_button :image_c0_dnr, '1' %> 有
+      <%= f.radio_button :image_c0_dnr, '0' %> 無
+    </div> 

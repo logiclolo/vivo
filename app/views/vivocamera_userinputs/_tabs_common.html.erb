@@ -1,0 +1,47 @@
+<div id="tabs_common", class="content_block">
+    
+    <%= f.label :soctype, "SOC" %>
+    <%= f.radio_button :soctype, 'Rossisni' %> Rossini
+    <%= f.radio_button :soctype, 'HiSillicon' %> HiSillicon
+    <br>    
+    
+    <%= f.label :machinetype, "機種" %>
+    <%= f.radio_button :machinetype, 'Box' %> Box
+    <%= f.radio_button :machinetype, 'Dome' %> Dome
+    <%= f.radio_button :machinetype, 'Bullet' %> Bullet
+    <%= f.radio_button :machinetype, 'Fisheye' %> Fisheye
+    <br>    
+
+    <%= f.label :nvideoout, "channel數目" %>
+    <%= f.text_field :nvideoout %>
+    <br>
+    <%= f.label :nmediastream, "stream 數目" %>
+    <%= f.text_field :nmediastream %>
+    <br>
+    <%= f.label :nanystream, "anystream 數目" %>
+    <%= f.text_field :nanystream %>
+    <br>   
+    <%= f.label :ndi, "di數目" %>
+    <%= f.text_field :ndi %> 
+    <br>    
+    <%= f.label :ndo, "do數目" %>
+    <%= f.text_field :ndo %>
+    <br>
+    <%= f.label :nmotion, "Motion window 數目" %>
+    <%= f.text_field :nmotion %>
+    <br>
+    <%= f.label :tampering, "有無tampering" %>
+    <%= f.radio_button :tampering, '1' %> 有
+    <%= f.radio_button :tampering, '0' %> 無
+    <br>  
+    <%= f.label :eptz, "有無eptz" %>
+    <%= f.radio_button :eptz, '1'%> 有
+    <%= f.radio_button :eptz, '0' %> 無
+    <br>          
+    <%= f.label :supportsd, "有無SD卡" %>
+    <%= f.radio_button :supportsd, '1' %> 有
+    <%= f.radio_button :supportsd, '0' %> 無
+    <br>       
+    <br>     
+  
+</div>

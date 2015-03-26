@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
+  #root 'static_pages#home'
+  root 'vivocameras#index'
   get 'vivocameras/new'
   get 'vivocameras/show'
   get 'vivocameras/edit'
+  get 'vivocameras/download'
   get 'vivocamera_userinputs/new'
   get 'vivocamera_userinputs/show'
   get 'vivocamera_userinputs/edit'
+  get 'vivocamera_userinputs/destroy'
   patch 'vivocamera_userinputs/update'
   
   get 'inputcamera' =>'vivocameras#new'

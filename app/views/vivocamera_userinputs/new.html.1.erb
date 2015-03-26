@@ -1,0 +1,163 @@
+
+IP camera name: <%= @vivocamera.name  %> ( <%= link_to "back" , root_path  %>)
+<hr />
+
+<%= form_for @userinput, :url => vivocamera_userinputs_path(@vivocamera)   do |f|  %>
+<div id="tabs">
+    <ul>
+      <li><a href="#tabs-1">common</a></li>
+      <li><a href="#tabs-2">daynight</a></li>
+      <li><a href="#tabs-3">audio</a></li>
+      <li><a href="#tabs-4">image</a></li>
+      <li><a href="#tabs-5">smart stream</a></li>
+      <li><a href="#tabs-6">videoout</a></li>
+      <li><a href="#tabs-7">vadp</a></li>
+      <li><a href="#tabs-8">thermal</a></li>
+      <li><a href="#tabs-9">motion</a></li>
+      <li><a href="#tabs-10">media</a></li>
+      <li><a href="#tabs-11">localstorage</a></li>
+      <li><a href="#tabs-12">version</a></li>
+      <li><a href="#tabs-13">protocol</a></li>
+      <li><a href="#tabs-14">network</a></li>
+      <li><a href="#tabs-15">wireless</a></li>
+      <li><a href="#tabs-16">remotecamctrl</a></li>
+      <li><a href="#tabs-17">uart</a></li>
+      <li><a href="#tabs-18">transmission</a></li>
+      <li><a href="#tabs-19">storage</a></li>
+      <li><a href="#tabs-20">derivative</a></li>
+      <li><a href="#tabs-21">image</a></li>
+      <li><a href="#tabs-22">test</a></li>
+    </ul>
+    <div id="tabs-1">
+
+    <%= f.label :bootuptime, "bootuptim" %>
+    <%= f.text_field :bootuptime %>
+    <br>
+    <%= f.label :npir, "npir" %>
+    <%= f.text_field :npir, value:'1' %>
+    <br> 
+    <%= f.label :ndi, "ndi" %>
+    <%= f.text_field :ndi, value:'1' %> 
+    <br>    
+    <%= f.label :nvi, "nvi" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "ndo" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "naudioin" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "naudioout" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "nvideoin" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "nvideoout" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>
+    <%= f.label :nvi, "nmediastream" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>   
+    <%= f.label :nvi, "nuart" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>     
+    <%= f.label :nvi, "nvideoinprofile" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>    
+    <%= f.label :nvi, "nmotion" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>    
+    <%= f.label :nvi, "nmotionprofile" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br> 
+    <%= f.label :nvi, "ptzenabled" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br> 
+    <%= f.label :nvi, "windowless" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>     
+    <%= f.label :nvi, "evctrlchannel" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>  
+    <%= f.label :nvi, "joystick" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>      
+    <%= f.label :nvi, "npreset" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>     
+    <%= f.label :nvi, "eptz" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>        
+    <%= f.label :nvi, "nanystream" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>     
+    <%= f.label :nvi, "iva" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>     
+    <%= f.label :nvi, "whitelight" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>      
+    <%= f.label :nvi, "iris" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>    
+    <%= f.label :nvi, "tampering" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>      
+    <%= f.label :nvi, "adaptiverecording" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>    
+    <%= f.label :nvi, "adaptivestreaming" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>        
+    <%= f.label :nvi, "supportsd" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>        
+    <%= f.label :nvi, "fisheye" %>
+    <%= f.text_field :nvi, value:'1' %>
+    <br>   
+    <%= f.label :nvi, "supporttriggertypes" %>
+    <br>
+    <%= f.check_box :nvi, :checked => true %>seq
+    <%= f.check_box :nvi, :checked => true %>boot
+    <%= f.check_box :nvi, :checked => true %>motion
+    <%= f.check_box :nvi, :checked => true %>networkfail
+    <%= f.check_box :nvi, :checked => true %>recnotify
+    <%= f.check_box :nvi, :checked => true %>tampering
+    <%= f.check_box :nvi, :checked => true %>vi
+    <%= f.check_box :nvi, :checked => true %>vadp
+    <%= f.check_box :nvi, :checked => true %>di
+    <%= f.check_box :nvi, :checked => true %>volalarm
+    <%= f.check_box :nvi, :checked => true %>temperature
+    <%= f.check_box :nvi, :checked => true %>pir
+    <br>   
+    </div>
+
+    <div id="tabs-2">
+
+    <%= f.label :ir, "daynight_support" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>
+    <%= f.label :ir, "daynight_builtinir" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>
+    <%= f.label :ir, "daynight_externalir" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>
+    <%= f.label :ir, "daynight_smartir" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>    
+    <%= f.label :ir, "daynight_ircutfilter" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>
+    <%= f.label :ir, "daynight_lightsensor" %>
+    <%= f.text_field :ir, value:'1' %>
+    <br>
+    
+    </div>     
+
+
+    <%= f.submit "Create" %>
+    <br>
+<% end  %>

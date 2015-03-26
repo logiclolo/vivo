@@ -1,12 +1,24 @@
-List of all Vivotek cameras:
+         <div>
+         <!--<div class="input_camera">-->
+         <!--<h3>Create IP camera:</h3>-->
+         <%= link_to "Create an IP camera", inputcamera_path, class: "btn btn-primary" %>
+           
+         </div>
+
+List of all Cameras:
  
 <ul>
 <% @vivocameras.each do |vivocamera| %>
 	<li>
-	 Vivo IPcamera name: <%= vivocamera.name %>
-	  <%= link_to 'show', :controller => :vivocamera_userinputs, :action => :show ,:vivocamera_id => vivocamera.id   %>
+	  Camera name: <%= vivocamera.name %>
+	  --
 	  <%= link_to 'edit camera name', :controller => :vivocameras, :action => :edit , :vivocamera_id => vivocamera.id  %>
-	 
+	  |
+	  <%= link_to 'edit properties', :controller => :vivocamera_userinputs, :action => :edit ,:vivocamera_id => vivocamera.id   %>
+	  |
+	  <%= link_to 'delete camera', :controller => :vivocamera_userinputs, :action => :destroy ,:vivocamera_id => vivocamera.id   %>
+	  |
+	  <%= link_to "download configs and CDF", :controller => :vivocameras, :action => :download, :vivocamera_name => vivocamera.name,:vivocamera_id => vivocamera.id %>
 	</li>
 <% end %>
 

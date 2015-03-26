@@ -1,0 +1,42 @@
+<div id="tabs_network">
+      
+      <%= f.label :network_wire, "有無支援wire" %>
+      <%= f.radio_button :network_wire, '1' %> 有
+      <%= f.radio_button :network_wire, '0' %> 無
+      <br>
+      <%= f.label :network_wireless, "有無支援wireless" %>
+      <%= f.radio_button :network_wireless, '1' %> 有
+      <%= f.radio_button :network_wireless, '0' %> 無
+      <br>    
+      <%= f.label :wireless_s802dot11b, "有無支援s802dot11b" %>
+      <%= f.radio_button :wireless_s802dot11b, '1' %> 有
+      <%= f.radio_button :wireless_s802dot11b, '0' %> 無
+      <br> 
+      <%= f.label :wireless_s802dot11g, "有無支援s802dot11g" %>
+      <%= f.radio_button :wireless_s802dot11g, '1' %> 有
+      <%= f.radio_button :wireless_s802dot11g, '0' %> 無
+      <br> 
+      <%= f.label :wireless_s802dot11n, "有無支援s802dot11n" %>
+      <%= f.radio_button :wireless_s802dot11n, '1' %> 有
+      <%= f.radio_button :wireless_s802dot11n, '0' %> 無
+      <br> 
+      <%= f.label :wireless_encrypt_wep, "有無支援encrypt_wep" %>
+      <%= f.radio_button :wireless_encrypt_wep, '1' %> 有
+      <%= f.radio_button :wireless_encrypt_wep, '0' %> 無
+      <br> 
+      <%= f.label :wireless_encrypt_wpa, "有無支援encrypt_wpa" %>
+      <%= f.radio_button :wireless_encrypt_wpa, '1' %> 有
+      <%= f.radio_button :wireless_encrypt_wpa, '0' %> 無
+      <br> 
+      <%= f.label :wireless_encrypt_wpa2, "有無支援encrypt_wpa2" %>
+      <%= f.radio_button :wireless_encrypt_wpa2, '1' %> 有
+      <%= f.radio_button :wireless_encrypt_wpa2, '0' %> 無
+      <br> 
+      <%= f.label :wireless_beginchannel, "Begin Channel" %>
+      <%= f.text_field :wireless_beginchannel %>
+      <br>
+      <%= f.label :wireless_endchannel, "End Channel" %>
+      <%= f.text_field :wireless_endchannel %>
+      <br>   
+      
+</div> 

@@ -2,34 +2,17 @@
 <html>
 <head>
   <title><%= yield(:title) %> | Vivotek version0 software</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    "vendor",      :media => "all", :debug => false %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag "vendor", :debug => false %>
+  <%= javascript_include_tag 'application' %>
+
   <%= csrf_meta_tags %>
      <%= render 'layouts/shim' %>
 </head>
 <body>
     <%= render 'layouts/header' %>
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      
     <div class="container">
-       <div id="sub">
-         
-         <div class="input_camera">
-         <h1>Create IP camera:</h1>
-         <%= link_to "Create an IP camera", inputcamera_path, class: "btn btn-primary" %>
-           
-         </div>
-         
-         <div class="input_camera">
-           <h1> List of all Vivotek cameras:</h1>
-         <%= link_to "Show all IP cameras", cameraindex_path, class: "btn btn-primary" %>
-          </div>
-         
-         
-       </div>
-  
        <div id="main">
          <%= yield %>
        </div>
