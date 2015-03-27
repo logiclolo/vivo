@@ -148,3 +148,62 @@ visibility: hidden;
   bottom: 0;
   z-index: 1;
 }
+
+/* others */
+
+.list-head dl
+{
+  margin-left: 20px;
+}
+
+.list-head label
+{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.list-content-label
+{
+  text-decoration: underline;
+}
+
+label.overlay {
+    color: #888888;
+    font-style: italic;
+    left: 50px;
+    overflow: hidden;
+    position: absolute;
+    top: 3px;
+}
+
+div .special_area input, div .special_area span{
+  font-family: "lucida grande",arial,verdana,sans-serif;
+	font-size:12px;	
+	color:black;
+	vertical-align:middle;
+}
+
+.div_videomode
+{
+  margin-bottom: 30px;
+}
+
+div .vivotable
+{
+  margin-top: 15px;
+}
+
+/* Debug */
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
