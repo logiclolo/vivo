@@ -193,6 +193,19 @@ div .vivotable
   margin-top: 15px;
 }
 
+/* table scroll cumstom */
+
+input.tablescroll_td_input
+{
+  padding: 0 3px;
+  width: 50px;
+}
+
+input.tablescroll_td_input_hide
+{
+  display: none;
+}
+
 /* Debug */
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

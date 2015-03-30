@@ -7,7 +7,7 @@
     <br>
 
     <%= f.label :nvideomode, "Video mode 數目:" %>
-    <%= f.text_field :nvideomode, class: "params", value:'2' %>
+    <%= f.text_field :nvideomode, class: "params"%>
     
     <br>
     <br>
@@ -40,13 +40,54 @@
 																  <col width="20"/>
 																	<col width="150"/>
 																	<col width="70"/>
-																
 																</colgroup>
 																<tbody id="tbody_mode0">
+																	
 																	<!-- Selected resolution Content -->
-																
+																	<% nres = @userinput["videoin_c0_mode0_nresolution"] %>
+																	<% nres = nres.to_i %>
+																	<% for i in 0..(nres-1) %>
+																		<% res = "videoin_c0_mode0_resolution_%d" % i %>
+																		<% if @userinput[res] != nil %>
+																			<tr>
+																				<td>
+																					<input type="checkbox"/>
+																				</td>
+																				<td>
+																					<%= @userinput[res] %>
+																					<%= f.text_field res.parameterize.underscore.to_sym, class:"tablescroll_td_input_hide" %>
+																				</td>
+																				<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode0_maxframerate_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																				</td>
+																				<% if @userinput["h265"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode0_maxfps_h265_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["h264"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode0_maxfps_h264_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["mjpeg"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode0_maxfps_mjpeg_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																			</tr>
+																		<% end %>
+																	<% end %>
+																	
 																</tbody>
-                                </table>
+															</table>
+															<div style="display:none">
+																<%= f.text_field "videoin_c0_mode0_nresolution".parameterize.underscore.to_sym %>	
+															</div>
 													    </div>
 													    
 															<table id="res_tablescroll_foot_mode0" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
@@ -118,7 +159,7 @@
 											  <td></td>
 											  <td>
 											    <div id="res_tablescroll_new_mode0" class="special_area" style="display:none">
-                            <span title="symbol" id="presetNameID">resolution</span>:
+                            						<span title="symbol" id="presetNameID">resolution</span>:
 											      <!--<label for="addPresetInput" class="pre overlay" style=""><span title="symbol">add_preset_location</span></label>-->
 												    <input type="text" id="new_resolution_input_mode0" name="addpos_temp" maxlength="40" value="" style="width:100px;" onKeyPress="return KeyPress(event);"/>
 												    <input type="button" title="symbol" value="add" onclick="addResolution('_mode0');"/>
@@ -129,7 +170,7 @@
 										
 										<!-- video mode 0 table (default setting) -->
 										<table id="" class="vivotable" style="margin-left:0px">
-                      <tr>
+                      						<tr>
 												<td>
 													<div class="tablescroll tablescroll-patrol">
 														  <table id="default_tablescroll_head_mode0" cellspacing="0" class="tablescroll_head" style="width:240px;table-layout:fixed">
@@ -142,8 +183,8 @@
 															</thead>
 														  </table>
 														  
-															<div id="default_div_body_mode0" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
-															  <table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="default_tablescroll_body_mode0" class="tablescroll_body">
+														<div id="default_div_body_mode0" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
+															<table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="default_tablescroll_body_mode0" class="tablescroll_body">
 																<colgroup id="default_colgroup_mode0">
 																  <col width="20"/>
 																	<col width="150"/>
@@ -153,7 +194,7 @@
 																	<!-- Selected resolution Content -->
 																
 																</tbody>
-                                </table>
+                                							</table>
 													    </div>
 													    
 															<table id="default_tablescroll_foot_mode0" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
@@ -174,19 +215,19 @@
 												</td>
 											</tr>
 										</table>
-	                  </div>
+	                  				</div>
 	                  
 	                  
 										
-										<!-- video mode 1 table  -->
-										<div id="div_videomode1" class="div_videomode" style="display:none">
-										<%= f.label :resolution_fps, "-- Video mode 2 -- " %>
+					<!-- video mode 1 table  -->
+					<div id="div_videomode1" class="div_videomode" style="display:none">
+					<%= f.label :resolution_fps, "-- Video mode 2 -- " %>
                     <br>
                     <span>Effective pixels:</span>
                     <%= f.text_field :mode1_effectivepixels, style: "width:120px", value:'1920x1080' %>
                     <table id="table_videomode1" class="vivotable" style="margin-left:0px">
 											<tr>
-                        <td>
+                        						<td>
 													<div class="tablescroll tablescroll-patrol">
 														  <table id="res_tablescroll_head_mode1" cellspacing="0" class="tablescroll_head" style="width:240px;table-layout:fixed">
 															<thead>
@@ -198,8 +239,8 @@
 															</thead>
 														  </table>
 														  
-															<div id="res_div_body_mode1" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
-															  <table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="res_tablescroll_body_mode1" class="tablescroll_body">
+														<div id="res_div_body_mode1" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
+															<table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="res_tablescroll_body_mode1" class="tablescroll_body">
 																<colgroup id="colgroup_mode1">
 																  <col width="20"/>
 																	<col width="150"/>
@@ -208,9 +249,51 @@
 																</colgroup>
 																<tbody id="tbody_mode1">
 																	<!-- Selected resolution Content -->
+																	<% nres = @userinput["videoin_c0_mode1_nresolution"] %>
+																	<% nres = nres.to_i %>
+																	<% for i in 0..(nres-1) %>
+																		<% res = "videoin_c0_mode1_resolution_%d" % i %>
+																		<% if @userinput[res] != nil %>
+																			<tr>
+																				<td>
+																					<input type="checkbox"/>
+																				</td>
+																				<td>
+																					<%= @userinput[res] %>
+																					<%= f.text_field res.parameterize.underscore.to_sym, class:"tablescroll_td_input_hide" %>
+																				</td>
+																				<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode1_maxframerate_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																				</td>
+																				<% if @userinput["h265"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode1_maxfps_h265_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["h264"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode1_maxfps_h264_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["mjpeg"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode1_maxfps_mjpeg_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																			</tr>
+																		<% end %>
+																	<% end %>
 																
 																</tbody>
-                                </table>
+                              </table>
+                              <div style="display:none">
+																<%= f.text_field "videoin_c0_mode1_nresolution".parameterize.underscore.to_sym %>	
+															</div>
+
 													    </div>
 													    
 															<table id="res_tablescroll_foot_mode1" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
@@ -315,12 +398,11 @@
 																</colgroup>
 																<tbody id="default_tbody_mode1">
 																	<!-- Selected resolution Content -->
-																
+
 																</tbody>
-                                </table>
+                              </table>
 													    </div>
-													    
-															<table id="default_tablescroll_foot_mode1" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
+													    <table id="default_tablescroll_foot_mode1" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
 															<tfoot>
 																<tr>
 																  <!--
@@ -341,10 +423,10 @@
 										
 										</div>
 										
-										<!-- video mode 2 table -->
+					<!-- video mode 2 table -->
 										
-										<div id="div_videomode2" class="div_videomode" style="display:none">
-										<%= f.label :resolution_fps, "-- Video mode 3 -- " %>
+					<div id="div_videomode2" class="div_videomode" style="display:none">
+					<%= f.label :resolution_fps, "-- Video mode 3 -- " %>
                     <br>
                     <span>Effective pixels:</span>
                     <%= f.text_field :mode2_effectivepixels, style: "width:120px", value:'1920x1080' %>
@@ -362,8 +444,8 @@
 															</thead>
 														  </table>
 														  
-															<div id="res_div_body_mode2" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
-															  <table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="res_tablescroll_body_mode2" class="tablescroll_body">
+														<div id="res_div_body_mode2" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
+															<table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="res_tablescroll_body_mode2" class="tablescroll_body">
 																<colgroup id="colgroup_mode2">
 																  <col width="20"/>
 																	<col width="150"/>
@@ -372,9 +454,51 @@
 																</colgroup>
 																<tbody id="tbody_mode2">
 																	<!-- Selected resolution Content -->
+																	<% nres = @userinput["videoin_c0_mode2_nresolution"] %>
+																	<% nres = nres.to_i %>
+																	<% for i in 0..(nres-1) %>
+																		<% res = "videoin_c0_mode2_resolution_%d" % i %>
+																		<% if @userinput[res] != nil %>
+																			<tr>
+																				<td>
+																					<input type="checkbox"/>
+																				</td>
+																				<td>
+																					<%= @userinput[res] %>
+																					<%= f.text_field res.parameterize.underscore.to_sym, class:"tablescroll_td_input_hide" %>
+																				</td>
+																				<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode2_maxframerate_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																				</td>
+																				<% if @userinput["h265"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode2_maxfps_h265_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["h264"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode2_maxfps_h264_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																				<% if @userinput["mjpeg"] == "1" %>
+																					<td style="text-align:left">
+																					<% symbol = "videoin_c0_mode2_maxfps_mjpeg_%d" % i %>
+																					<%= f.text_field symbol.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					</td>
+																				<% end %>
+																			</tr>
+																		<% end %>
+																	<% end %>
 																
 																</tbody>
-                                </table>
+                              </table>
+                              <div style="display:none">
+																<%= f.text_field "videoin_c0_mode2_nresolution".parameterize.underscore.to_sym %>	
+															</div>
+
 													    </div>
 													    
 															<table id="res_tablescroll_foot_mode2" cellspacing="0" class="tablescroll_foot" style="width:240px;" id="tblPatrolFootForIE6">
@@ -389,6 +513,7 @@
 																</tr>
 															</tfoot>
 														  </table>
+
 													</div>
 												</td>
 												<td style="vertical-align: middle; width: 1px; padding: 0px 3px 0 3px;">
