@@ -14,8 +14,9 @@
 
 var strcodec;
 var ntable=3;
-var restablewidth = [241, 311, 381, 451, 521, 591]; // magic numbers
-var defaulttablewidth = [241, 381, 521, 661, 801, 941]; // magic numbers
+var restablewidth = [241, 311, 381, 451, 521]; // magic numbers
+//var defaulttablewidth = [241, 421, 601, 781, 961]; // magic numbers
+var defaulttablewidth = [351, 531, 711, 891, 1071]; // magic numbers
 var first_click_video_tab = true;
 
 jQuery(function() {
@@ -194,14 +195,22 @@ function addTableColumn(obj, mode, width, width2)
   if (add =="userinput_h265")
   {
     name = "h265";
+    $("#h265_maxbitrate").slideDown();
   }
   else if (add == "userinput_h264")
   {
     name = "h264";
+    $("#h264_maxbitrate").slideDown();
   }
   else if (add == "userinput_mjpeg")
   {
     name = "mjpeg";
+    $("#mjpeg_maxbitrate").slideDown();
+  }
+  else if (add == "userinput_mpeg4")
+  {
+    name = "mpeg4";
+    $("#mpeg4_maxbitrate").slideDown();
   }
   
   /******* Resolutions & MaxFPS table ********/
@@ -213,7 +222,7 @@ function addTableColumn(obj, mode, width, width2)
   $("#colgroup"+mode).append("<col class='"+name+"' width='70'/>");
   
   //add table column title
-  $("#tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Max FPS (" + name + ")</span></th>");
+  $("#tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Max FPS <br>of " + name + "</span></th>");
   
   //add table content
   var count = 0;
@@ -238,22 +247,22 @@ function addTableColumn(obj, mode, width, width2)
   $("#default_tablescroll_body"+mode).css("width",width2);
   $("#default_tablescroll_foot"+mode).css("width",width2);
   $("#default_colgroup"+mode).append("<col class='"+name+"' width='70'/>");
-  $("#default_colgroup"+mode).append("<col class='"+name+"' width='70'/>");
+  $("#default_colgroup"+mode).append("<col class='"+name+"' width='110'/>");
   
   //add table colunm title
-  $("#default_tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Framerate (" + name + ")</span></th>" +
-                                            "<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Bitrate (" + name + ")</span></th>");
+  $("#default_tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Framerate  of " + name + "</span></th>" +
+                                            "<th class='"+name+"'  style='width: 110px;text-align:left'><span title='symbol'>Bitrate (bps) <br> of " + name + "</span></th>");
   //add table content                                          
   var stream = 0;
   if($("#default_tbody"+mode).children().length != 0)
   {
     $("#default_tbody"+mode).find('tr').each(function(){
       // check whether to add table content or not
-      // 2 means "check box" and "stream" 
-      if($(this).find('td').length != (ncodec*2 + 2))
+      // 2 means stream" , "eptz" and "resolution"
+      if($(this).find('td').length != (ncodec*2 + 3))
       {
-        $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_framerate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>" +
-                      "<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_bitrate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>")
+        $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_framerate]' class='tablescroll_td_input' type='text' value='30'/></td>" +
+                      "<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_bitrate]' class='tablescroll_td_input_wide' type='text' value='30'/></td>")
       }
       stream++;
     })
@@ -270,14 +279,22 @@ function removeTableColumn(obj, mode, width, width2)
   if (remove =="userinput_h265")
   {
    name = "h265";
+   $("#h265_maxbitrate").slideUp();
   }
   else if (remove == "userinput_h264")
   {
     name = "h264";
+    $("#h264_maxbitrate").slideUp();
   }
   else if (remove == "userinput_mjpeg")
   {
     name = "mjpeg";
+    $("#mjpeg_maxbitrate").slideUp();
+  }
+  else if (remove == "userinput_mpeg4")
+  {
+    name = "mpeg4";
+    $("#mpeg4_maxbitrate").slideUp();
   }
   
   $("#tbody"+mode+" tr").each(function() {
@@ -323,6 +340,23 @@ function calCodec()
   $(".codec").each(function (){
     if($(this).is(":checked"))
     {
+      var codec_name = $(this).attr('id');
+      if (codec_name =="userinput_h265")
+      {
+        $("#h265_maxbitrate").slideDown();
+      }
+      else if (codec_name == "userinput_h264")
+      {
+        $("#h264_maxbitrate").slideDown();
+      }
+      else if (codec_name == "userinput_mjpeg")
+      {
+        $("#mjpeg_maxbitrate").slideDown();
+      }
+      else if (codec_name == "userinput_mpeg4")
+      {
+        $("#mpeg4_maxbitrate").slideDown();
+      }
 
       strcodec += $(this).attr('id').replace("userinput_","") + ',';//add codec string
       
@@ -416,16 +450,22 @@ $(document).ready(function(){
         {
           for (i=0;i<userinput_nvideomode;i++)
           {
+            var stream_num;
             $("#default_tbody_mode"+i).find('tr').each(function(){
-              var stream_num = $(this).attr('id').substr($(this).attr('id').length - 1);
+              stream_num = $(this).attr('id').substr($(this).attr('id').length - 1);
               stream_num = parseInt(stream_num) + 1;
             
-              if (stream_num > userinput_nmediastream)
+              if (stream_num <= userinput_nmediastream)
               {
-                $(this).remove();
+                $(this).show();
               }
-            
+              else
+              {
+                $(this).hide();
+              }
+
             })
+            
           }
         }
       }
@@ -449,6 +489,7 @@ $(document).ready(function(){
           var mode = "_mode" + i;
           addTableColumn(this, mode, restablewidth[ncodec], defaulttablewidth[ncodec]);
         }
+        
       }
       else
       {

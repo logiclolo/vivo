@@ -7,31 +7,40 @@
     <%= f.check_box :mjpeg, class: "codec" %>MJPEG
     <%= f.check_box :mpeg4, class: "codec" %>MPEG4
    
-    <br>
 
-    <%= f.label :nvideomode, "Video mode 數目:" %>
-    <%= f.text_field :nvideomode, class: "params"%>
     
     <br>
-    <div id="h265_maxbitrate">
-    <%= f.label :nvideomode, "Max bitrate under H265:" %>
-    <%= f.text_field :nvideomode, class: "params"%>
-    </div>
+    <div id="h265_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
+    <span style="width:295px">Maximun bitrate of H265 &nbsp:</span>
+    <%= f.text_field :videoin_c0_h265_maxbitrate, style: "width:120px" %>
+    <span>(bps)</span>
     <br>
-    <div id="h264_maxbitrate">
-    <%= f.label :nvideomode, "Max bitrate under H264:" %>
-    <%= f.text_field :nvideomode, class: "params"%>
     </div>
+    
+    <div id="h264_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
+    <span style="width:295px">Maximun bitrate of H264 &nbsp:</span>
+    <%= f.text_field :videoin_c0_h264_maxbitrate, style: "width:120px" %>
+    <span>(bps)</span>
     <br>
-    <div id="mjpeg_maxbitrate">
-    <%= f.label :nvideomode, "Max bitrate under MJPEG:" %>
-    <%= f.text_field :nvideomode, class: "params"%>
     </div>
+    
+    <div id="mjpeg_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
+    <span style="width:295px">Maximun bitrate of MJPEG :</span>
+    <%= f.text_field :videoin_c0_mjpeg_maxbitrate, style: "width:120px" %>
+    <span>(bps)</span>
     <br>
-    <div id=",mpeg4_maxbitrate">
-    <%= f.label :nvideomode, "Max bitrate under MPEG4:" %>
-    <%= f.text_field :nvideomode, class: "params"%>
     </div>
+    
+    <div id="mpeg4_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
+    <span style="width:295px">Maximun bitrate of MPEG4 :</span>
+    <%= f.text_field :videoin_c0_mpeg4_maxbitrate, style: "width:120px" %>
+    <span>(bps)</span>
+    <br>
+    </div>
+    
+	<br>
+    <%= f.label :nvideomode, "Video mode 數目:" %>
+    <%= f.text_field :nvideomode, class: "params", style: "width:120px"%>
     <br>
     <br>
     <%= f.label :resolution_fps, "Resolution and MaxFPS: " %>
@@ -201,6 +210,7 @@
 															  <tr id="default_tablescroll_tr_mode0">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
+																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -212,14 +222,15 @@
 																<colgroup id="default_colgroup_mode0">
 																	<col width="170"/>
 																	<col width="70"/>
+																	<col width="110"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode0">
 																	<!-- Selected default settings Content -->
 																	
 																	
-																	<% nstream = @userinput["nmediastream"] %>
-																	<% for i in 0..(nstream - 1) %>
+																	<%# nstream = @userinput["nmediastream"] %>
+																	<% for i in 0..3 %>
 																			
 																			<%= ("<tr id='mode0_stream%d'>" % i).html_safe %>
 																				<td>
@@ -229,6 +240,10 @@
 																					<% eptz = "eptz_c0_mode0_s%d_support" % i %>
 																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
+																				<td style="text-align:left">
+																					<% resolution = "videoin_c0_mode0_defaultsetting_s%d_resolution" % i %>
+																					<%= f.text_field resolution.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>	
+																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">
 																					<% framerate = "videoin_c0_mode0_defaultsetting_s%d_h265_framerate" % i %>
@@ -236,7 +251,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode0_defaultsetting_s%d_h265_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["h264"] == 1 %>
@@ -246,7 +261,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode0_defaultsetting_s%d_h264_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mjpeg"] == 1 %>
@@ -256,7 +271,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode0_defaultsetting_s%d_mjpeg_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mpeg4"] == 1 %>
@@ -266,7 +281,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode0_defaultsetting_s%d_mpeg4_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																			</tr>
@@ -463,6 +478,7 @@
 															  <tr id="default_tablescroll_tr_mode1">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
+																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -475,12 +491,13 @@
 																  
 																	<col width="170"/>
 																	<col width="70"/>
+																	<col width="110"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode1">
 																	<!-- Selected default settings Content -->
-																	<% nstream = @userinput["nmediastream"] %>
-																	<% for i in 0..(nstream - 1) %>
+																	<%# nstream = @userinput["nmediastream"] %>
+																	<% for i in 0..3 %>
 																			<%= ("<tr id='mode1_stream%d'>" % i).html_safe %>
 																				<td>
 																					<%= "Stream " + (i+1).to_s %>
@@ -489,6 +506,10 @@
 																					<% eptz = "eptz_c0_mode1_s%d_support" % i %>
 																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
+																				<td style="text-align:left">
+																					<% resolution = "videoin_c0_mode1_defaultsetting_s%d_resolution" % i %>
+																					<%= f.text_field resolution.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>	
+																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">
 																					<% framerate = "videoin_c0_mode1_defaultsetting_s%d_h265_framerate" % i %>
@@ -496,7 +517,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode1_defaultsetting_s%d_h265_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["h264"] == 1 %>
@@ -506,7 +527,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode1_defaultsetting_s%d_h264_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mjpeg"] == 1 %>
@@ -516,7 +537,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode1_defaultsetting_s%d_mjpeg_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mpeg4"] == 1 %>
@@ -526,7 +547,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode1_defaultsetting_s%d_mpeg4_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																			</tr>
@@ -721,6 +742,7 @@
 															  <tr id="default_tablescroll_tr_mode2">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
+																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -733,13 +755,14 @@
 																  
 																	<col width="170"/>
 																	<col width="70"/>
+																	<col width="110"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode2">
 																	<!-- Selected default setting Content -->
 																	
-																	<% nstream = @userinput["nmediastream"] %>
-																	<% for i in 0..(nstream - 1) %>
+																	<%# nstream = @userinput["nmediastream"] %>
+																	<% for i in 0..3 %>
 																			<%= ("<tr id='mode2_stream%d'>" % i).html_safe %>
 																				<td>
 																					<%= "Stream " + (i+1).to_s %>
@@ -748,6 +771,10 @@
 																					<% eptz = "eptz_c0_mode2_s%d_support" % i %>
 																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
+																				<td style="text-align:left">
+																					<% resolution = "videoin_c0_mode2_defaultsetting_s%d_resolution" % i %>
+																					<%= f.text_field resolution.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>	
+																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">
 																					<% framerate = "videoin_c0_mode2_defaultsetting_s%d_h265_framerate" % i %>
@@ -755,7 +782,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode2_defaultsetting_s%d_h265_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["h264"] == 1 %>
@@ -765,7 +792,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode2_defaultsetting_s%d_h264_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mjpeg"] == 1 %>
@@ -775,7 +802,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode2_defaultsetting_s%d_mjpeg_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																				<% if @userinput["mpeg4"] == 1 %>
@@ -785,7 +812,7 @@
 																					</td>
 																					<td style="text-align:left">
 																					<% bitrate = "videoin_c0_mode2_defaultsetting_s%d_mpeg4_bitrate" % i %>
-																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>
+																					<%= f.text_field bitrate.parameterize.underscore.to_sym, class: "tablescroll_td_input_wide" %>
 																					</td>
 																				<% end %>
 																			</tr>
