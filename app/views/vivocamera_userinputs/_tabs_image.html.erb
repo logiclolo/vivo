@@ -1,11 +1,22 @@
 <div id="tabs_image">
       
       <%= f.label :image_c0_sensor_type, "sensor 型號" %>
-      <%= f.radio_button :image_c0_sensor_type, 'imx123' ,:checked => true%> imx123
+      <%= f.radio_button :image_c0_sensor_type, 'imx123' %> imx123
       <%= f.radio_button :image_c0_sensor_type, 'imx103' %> imx103
       <%= f.radio_button :image_c0_sensor_type, 'ov5658' %> ov5658
       <br>
-      
+      <%= f.label :image_c0_iris_type, "Iris 類型" %>
+      <%= f.radio_button :image_c0_iris_type, 'p' %> P-iris
+      <%= f.radio_button :image_c0_iris_type, 'dc' %> DC-iris
+      <%= f.radio_button :image_c0_iris_type, 'fixed' %> Fixed iris
+      <br>
+      <div id="flickerless_div" style="display:none">
+      <%= f.label :image_c0_flickerless, "有無支援flickerless" %>
+      <%= f.radio_button :image_c0_flickerless, '1' %> 有
+      <%= f.radio_button :image_c0_flickerless, '0' %> 無
+      <br> 
+      </div>
+  
       <%= f.label :image_c0_backfocus, "有無backfocus" %>
       <%= f.radio_button :image_c0_backfocus, '1' %> 有
       <%= f.radio_button :image_c0_backfocus, '0' %> 無
@@ -25,4 +36,32 @@
       <%= f.label :image_c0_dnr, "有無DNR" %>
       <%= f.radio_button :image_c0_dnr, '1' %> 有
       <%= f.radio_button :image_c0_dnr, '0' %> 無
-    </div> 
+      <br>        
+      <%= f.label :image_c0_wdrpro, "有無WDR Pro" %>
+      <%= f.radio_button :image_c0_wdrpro, '1' %> 有
+      <%= f.radio_button :image_c0_wdrpro, '0' %> 無
+      <br>
+      <div id="wdrpro_div" style="display:none">
+      <%= f.label :image_c0_wdrpro_str, "有無WDR Pro Strength" %>
+      <%= f.radio_button :image_c0_wdrpro_str, '1' %> 有
+      <%= f.radio_button :image_c0_wdrpro_str, '0' %> 無
+      <br>
+      </div>
+
+      <%= f.label :image_c0_wdrc, "有無WDR Enhanced" %>
+      <%= f.radio_button :image_c0_wdrc, '1' %> 有
+      <%= f.radio_button :image_c0_wdrc, '0' %> 無
+      <br>
+      <%= f.label :image_c0_defog, "有無Defog" %>
+      <%= f.radio_button :image_c0_defog, '1' %> 有
+      <%= f.radio_button :image_c0_defog, '0' %> 無
+      <br>
+      <%= f.label :image_c0_aespeed, "有無AE Speed" %>
+      <%= f.radio_button :image_c0_aespeed, '1' %> 有
+      <%= f.radio_button :image_c0_aespeed, '0' %> 無
+      <br>
+      <%= f.label :image_c0_scene_mode, "有無情境模式" %>
+      <%= f.radio_button :image_c0_scene_mode, '1' %> 有
+      <%= f.radio_button :image_c0_scene_mode, '0' %> 無
+      <br>
+</div> 

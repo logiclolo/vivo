@@ -14,8 +14,8 @@
 
 var strcodec;
 var ntable=3;
-var restablewidth = [241, 311, 381, 451]; // magic numbers
-var defaulttablewidth = [171, 311, 451, 591]; // magic numbers
+var restablewidth = [241, 311, 381, 451, 521, 591]; // magic numbers
+var defaulttablewidth = [171, 311, 451, 591, 731, 871]; // magic numbers
 
 jQuery(function() {
   jQuery( "#tabs" ).tabs();
@@ -226,7 +226,7 @@ function addTableColumn(obj, mode, width, width2)
   
   //add table content
   var count = 0;
-  if($("#tbody"+mode).children() != null)
+  if($("#tbody"+mode).children().length != 0)
   {
     $("#tbody"+mode).find('tr').each(function(){
       // check whether to add table content or not
@@ -234,9 +234,9 @@ function addTableColumn(obj, mode, width, width2)
       if($(this).find('td').length != (ncodec + 3))
       {
         // add "Codec MaxFPS" table content
-        $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0_mode"+mode+"_maxfps_"+name+"_"+count+"]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>");
+        $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_maxfps_"+name+"_"+count+"]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>");
       }
-      count = count + 1;
+      count++;
     })
   }
   
@@ -250,15 +250,20 @@ function addTableColumn(obj, mode, width, width2)
   $("#default_colgroup"+mode).append("<col class='"+name+"' width='70'/>");
   
   //add table colunm title
-  $("#default_tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Bitrate (" + name + ")</span></th>" +
-                                            "<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Framerate (" + name + ")</span></th>");
+  $("#default_tablescroll_tr"+mode).append("<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Framerate (" + name + ")</span></th>" +
+                                            "<th class='"+name+"'  style='width: 70px;text-align:left'><span title='symbol'>Bitrate (" + name + ")</span></th>");
   //add table content                                          
   var stream = 0;
-  if($("#default_tbody"+mode).children() != null)
+  if($("#default_tbody"+mode).children().length != 0)
   {
     $("#default_tbody"+mode).find('tr').each(function(){
-      $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_s"+stream+"_defaultsetting_"+name+"_bitrate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>" +
-                      "<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_s"+stream+"_defaultsetting_"+name+"_framerate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>")
+      // check whether to add table content or not
+      // 2 means "check box" and "stream" 
+      if($(this).find('td').length != (ncodec*2 + 2))
+      {
+        $(this).append("<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_framerate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>" +
+                      "<td class='" + name + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_defaultsetting_s"+stream+"_"+name+"_bitrate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>")
+      }
       stream++;
     })
   }
@@ -284,11 +289,11 @@ function removeTableColumn(obj, mode, width, width2)
     name = "mjpeg";
   }
   
-  $("#tbody tr"+mode).each(function() {
+  $("#tbody"+mode+" tr").each(function() {
    $(this).find("td."+name).remove();
   });
   
-  $("#default_tbody tr"+mode).each(function() {
+  $("#default_tbody"+mode+" tr").each(function() {
    $(this).find("td."+name).remove();
   });
   
@@ -310,19 +315,6 @@ function removeTableColumn(obj, mode, width, width2)
 }
 
 
-function addStream2Table(mode)
-{
-  for (var i=0;i<userinput_nmediastream;i++)
-  {
-    $("#default_tbody"+mode).find("tr").remove();
-  }
-  
-  for (var i=0;i<userinput_nmediastream;i++)
-  {
-    $("#default_tbody"+mode).append("<tr><td><input name='userinput["+i+"]' type='checkbox'/></td><td title='" + i +"'>Stream " + (i+1) + "</td>");
-  }
-}
-
 function calCodec()
 {
   ncodec = 0;
@@ -330,10 +322,17 @@ function calCodec()
   
   prepareTable();
   
+  // get the total codec first!
+  $(".codec").each(function (){
+    if($(this).is(":checked")){
+      ncodec++;
+    }
+  })
+  
   $(".codec").each(function (){
     if($(this).is(":checked"))
     {
-      ncodec = ncodec + 1;
+
       strcodec += $(this).attr('id').replace("userinput_","") + ',';//add codec string
       
       for (var i=0;i<ntable;i++)
@@ -341,11 +340,10 @@ function calCodec()
         var mode = "_mode" + i;
         addTableColumn(this, mode, restablewidth[ncodec], defaulttablewidth[ncodec]);
       }
+      
     }
   
   })
-  
-  
 }
 
 function prepareTable()
@@ -355,7 +353,6 @@ function prepareTable()
   {
     var mode = "_mode" + i;
     initVideoModeTable(mode);
-    addStream2Table(mode);
   }
   
   // only show nvideomode tables
@@ -372,7 +369,9 @@ $(document).ready(function(){
     loadcurrentsetting();
     
     // when changing params content ...
-    $(".params").change( function(){
+    // note: unbind() is to make sure not be bound twice
+    $(".params").unbind('change').change( function(){
+      console.log(event.target);
       var value = $(this).val();
       var id = $(this).attr('id');
       eval(id + "=" + value);
@@ -406,29 +405,6 @@ $(document).ready(function(){
             first_click = false;
             calCodec();
           }
-          else
-          {
-              for (var i=0;i<ntable;i++)
-              {
-                var mode = "_mode" + i;
-                addStream2Table(mode);
-                if($("#default_tbody"+mode).children() != null)
-                {
-                  var codec_name = strcodec.split(',') ;
-                  for (var j=0; j<ncodec;j++)
-                  {
-                    
-                    // generate default bitrate and framerate column
-                    var stream=0;
-                    $("#default_tbody"+mode).find('tr').each(function(){
-                      $(this).append("<td class='" + codec_name[j] + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_s"+stream+"_defaultsetting_"+codec_name[j]+"_bitrate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>" +
-                                    "<td class='" + codec_name[j] + "' style='text-align:left'><input name='userinput[videoin_c0"+mode+"_s"+stream+"_defaultsetting_"+codec_name[j]+"_framerate]' style='padding: 0 3px; width: 50px;' type='text' value='30'/></td>")
-                      stream = stream + 1;
-                    })
-                  }
-                 }
-              }
-          }
         }
  
       }                                                                          
@@ -436,7 +412,11 @@ $(document).ready(function(){
     
   
     // when clicks video codec ...
-    $(".codec").bind( "click", function() {
+    // note: unbind() is to make sure not be bound twice
+    $(".codec").unbind('click').bind( "click", function() {
+      console.log(event.target);
+      
+      console.log($(this).attr('id'));
       if($(this).is(":checked"))
       {
         ncodec = ncodec + 1;
@@ -461,30 +441,50 @@ $(document).ready(function(){
    
  
 
-    // flickerless show or hide
-    if ($("#userinput_iristype_fixed").is(":checked"))
+    // flickerless show or not
+    if ($("#userinput_image_c0_iris_type_fixed").is(":checked"))
     {
-        $("#flickerless").show();
+        $("#flickerless_div").show();
     }
-    $('#userinput_iristype_fixed').click(
+    $('#userinput_image_c0_iris_type_fixed').unbind('click').click(
       function(){
-        $("#flickerless").show();
-        $("#userinput_flickerless_1").attr("checked",true);
-        $("#flickerless").css("background-color","yellow");
-      })
-    $('#userinput_iristype_dc').click(
+        $("#flickerless_div").slideDown();
+        $("#userinput_image_c0_flickerless_1").attr("checked",true);
+        //$("#flickerless_div").css("background-color","yellow");
+    })
+    $('#userinput_image_c0_iris_type_dc').unbind('click').click(
       function(){
-        $("#flickerless").hide();
-        $("#userinput_flickerless_0").attr("checked",true);
+        $("#flickerless_div").slideUp();
+        $("#userinput_image_c0_flickerless_0").attr("checked",true);
         
-      })
-    $('#userinput_iristype_p').click(
+    })
+    $('#userinput_image_c0_iris_type_p').unbind('click').click(
       function(){
-        $("#flickerless").hide();
-        $("#userinput_flickerless_0").attr("checked",true);
+        $("#flickerless_div").slideUp();
+        $("#userinput_image_c0_flickerless_0").attr("checked",true);
     })
     
-    // video mode
+    
+    // wdr pro strength show or not
+    if ($("#userinput_image_c0_wdrpro_1").is(":checked"))
+    {
+        $("#wdrpro_div").show();
+    }
+    $('#userinput_image_c0_wdrpro_1').unbind('click').click(
+      function(){
+        $("#wdrpro_div").slideDown();
+        $("#userinput_image_c0_wdrpro_str_1").attr("checked",true);
+        //$("#wdrpro_div").css("background-color","yellow");
+    })
+    $('#userinput_image_c0_wdrpro_0').unbind('click').click(
+      function(){
+        $("#wdrpro_div").slideUp();
+        $("#userinput_image_c0_wdrpro_str_0").attr("checked",true);
+        
+    })
+
+    
+    
 })
 
 jQuery.fn.labelOver = function(overClass) {
