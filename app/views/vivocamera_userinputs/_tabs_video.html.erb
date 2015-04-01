@@ -2,37 +2,36 @@
 		
 		 
     <%= f.label :codec, "Codec: " %>
-    
-    <% if @userinput["h265"] == 1 %>   
-    	<%= f.check_box :h265, class: "codec", :checked => true %>H265
-    <% else %>
-    	<%= f.check_box :h265, class: "codec" %>H265
-    <% end %>
-    
-    <% if @userinput["h264"] == 1 %>   
-    	<%= f.check_box :h264, class: "codec", :checked => true %>H264
-    <% else %>
-    	<%= f.check_box :h264, class: "codec" %>H264
-    <% end %>
-    
-    <% if @userinput["mjpeg"] == 1 %>   
-    	<%= f.check_box :mjpeg, class: "codec", :checked => true %>MJPEG
-    <% else %>
-    	<%= f.check_box :mjpeg, class: "codec" %>MJPEG
-    <% end %>
-    
-    <% if @userinput["mpeg4"] == 1 %>   
-    	<%= f.check_box :mpeg4, class: "codec", :checked => true %>MPEG4
-    <% else %>
-    	<%= f.check_box :mpeg4, class: "codec" %>MPEG4
-    <% end %>
-    
-    
+ 	<%= f.check_box :h265, class: "codec" %>H265
+    <%= f.check_box :h264, class: "codec" %>H264
+    <%= f.check_box :mjpeg, class: "codec" %>MJPEG
+    <%= f.check_box :mpeg4, class: "codec" %>MPEG4
+   
     <br>
 
     <%= f.label :nvideomode, "Video mode 數目:" %>
     <%= f.text_field :nvideomode, class: "params"%>
     
+    <br>
+    <div id="h265_maxbitrate">
+    <%= f.label :nvideomode, "Max bitrate under H265:" %>
+    <%= f.text_field :nvideomode, class: "params"%>
+    </div>
+    <br>
+    <div id="h264_maxbitrate">
+    <%= f.label :nvideomode, "Max bitrate under H264:" %>
+    <%= f.text_field :nvideomode, class: "params"%>
+    </div>
+    <br>
+    <div id="mjpeg_maxbitrate">
+    <%= f.label :nvideomode, "Max bitrate under MJPEG:" %>
+    <%= f.text_field :nvideomode, class: "params"%>
+    </div>
+    <br>
+    <div id=",mpeg4_maxbitrate">
+    <%= f.label :nvideomode, "Max bitrate under MPEG4:" %>
+    <%= f.text_field :nvideomode, class: "params"%>
+    </div>
     <br>
     <br>
     <%= f.label :resolution_fps, "Resolution and MaxFPS: " %>
@@ -201,6 +200,7 @@
 															<thead>
 															  <tr id="default_tablescroll_tr_mode0">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
+																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -210,8 +210,8 @@
 														<div id="default_div_body_mode0" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
 															<table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="default_tablescroll_body_mode0" class="tablescroll_body">
 																<colgroup id="default_colgroup_mode0">
-																  <col width="20"/>
-																	<col width="150"/>
+																	<col width="170"/>
+																	<col width="70"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode0">
@@ -220,12 +220,14 @@
 																	
 																	<% nstream = @userinput["nmediastream"] %>
 																	<% for i in 0..(nstream - 1) %>
-																			<tr>
+																			
+																			<%= ("<tr id='mode0_stream%d'>" % i).html_safe %>
 																				<td>
-																					<input type="checkbox"/>
+																					<%= " Stream " + (i+1).to_s %>
 																				</td>
-																				<td>
-																					<%= "Stream " + (i+1).to_s %>
+																				<td style="text-align:left">
+																					<% eptz = "eptz_c0_mode0_s%d_support" % i %>
+																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">
@@ -460,6 +462,7 @@
 															<thead>
 															  <tr id="default_tablescroll_tr_mode1">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
+																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -469,20 +472,22 @@
 															<div id="default_div_body_mode1" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
 															  <table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="default_tablescroll_body_mode1" class="tablescroll_body">
 																<colgroup id="default_colgroup_mode1">
-																  <col width="20"/>
-																	<col width="150"/>
+																  
+																	<col width="170"/>
+																	<col width="70"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode1">
 																	<!-- Selected default settings Content -->
 																	<% nstream = @userinput["nmediastream"] %>
 																	<% for i in 0..(nstream - 1) %>
-																			<tr>
-																				<td>
-																					<input type="checkbox"/>
-																				</td>
+																			<%= ("<tr id='mode1_stream%d'>" % i).html_safe %>
 																				<td>
 																					<%= "Stream " + (i+1).to_s %>
+																				</td>
+																				<td style="text-align:left">
+																					<% eptz = "eptz_c0_mode1_s%d_support" % i %>
+																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">
@@ -715,6 +720,7 @@
 															<thead>
 															  <tr id="default_tablescroll_tr_mode2">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
+																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -724,8 +730,9 @@
 															<div id="default_div_body_mode2" class="tablescroll_wrapper" style="width:240px;height: 130px; overflow-x: hidden; overflow-y: auto;">
 															  <table cellspacing="0" style="table-layout: fixed; width: 240px;table-layout:fixed" id="default_tablescroll_body_mode2" class="tablescroll_body">
 																<colgroup id="default_colgroup_mode2">
-																  <col width="20"/>
-																	<col width="150"/>
+																  
+																	<col width="170"/>
+																	<col width="70"/>
 																
 																</colgroup>
 																<tbody id="default_tbody_mode2">
@@ -733,12 +740,13 @@
 																	
 																	<% nstream = @userinput["nmediastream"] %>
 																	<% for i in 0..(nstream - 1) %>
-																			<tr>
-																				<td>
-																					<input type="checkbox"/>
-																				</td>
+																			<%= ("<tr id='mode2_stream%d'>" % i).html_safe %>
 																				<td>
 																					<%= "Stream " + (i+1).to_s %>
+																				</td>
+																				<td style="text-align:left">
+																					<% eptz = "eptz_c0_mode2_s%d_support" % i %>
+																					<%= f.check_box eptz.parameterize.underscore.to_sym, class: "tablescroll_td_input" %>	
 																				</td>
 																				<% if @userinput["h265"] == 1 %>
 																					<td style="text-align:left">

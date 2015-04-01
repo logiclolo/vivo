@@ -15,21 +15,12 @@
 var strcodec;
 var ntable=3;
 var restablewidth = [241, 311, 381, 451, 521, 591]; // magic numbers
-var defaulttablewidth = [171, 311, 451, 591, 731, 871]; // magic numbers
+var defaulttablewidth = [241, 381, 521, 661, 801, 941]; // magic numbers
+var first_click_video_tab = true;
 
 jQuery(function() {
   jQuery( "#tabs" ).tabs();
 });
-
-function loadcurrentsetting()
-{
-  // eval important parameters
-  $(".params").each(function(){
-    var value = $(this).val();
-    var id = $(this).attr('id');
-    eval(id + "=" + value);
-  })
-}
 
 
 /* table scroll */
@@ -362,21 +353,49 @@ function prepareTable()
   }
 }
 
+function loadcurrentsetting()
+{
+  // eval important parameters
+  $(".params").each(function(){
+    var value = $(this).val();
+    var id = $(this).attr('id');
+    eval(id + "=" + value);
+  })
+}
+
 /***********Make sure HTML code is completely loaded *********/
 /****************** All start from here! *******************/
 $(document).ready(function(){
  
     loadcurrentsetting();
     
+    // tab event handler
+    $("#tabs" ).tabs({                                                                  
+      activate:function(event,ui){                                                       
+        var active = $('#tabs').tabs('option', 'active');
+        
+        // #tab video
+        if (active == 2)  
+        {
+          if(first_click_video_tab)// first click
+          {
+            first_click_video_tab = false;
+            calCodec();
+          }
+        }
+ 
+      }                                                                          
+    }); 
+    
     // when changing params content ...
     // note: unbind() is to make sure not be bound twice
     $(".params").unbind('change').change( function(){
-      console.log(event.target);
+      //console.log(event.target);
       var value = $(this).val();
       var id = $(this).attr('id');
       eval(id + "=" + value);
       
-      //number video mode
+      //video mode number
       if (id == "userinput_nvideomode")
       {
           for (i=0;i<ntable;i++)
@@ -389,34 +408,38 @@ $(document).ready(function(){
             $("#div_videomode"+i).show();
           }
       }
-    });
-    
-    // tab event handler
-    var first_click = true;
-    $("#tabs" ).tabs({                                                                  
-      activate:function(event,ui){                                                       
-        var active = $('#tabs').tabs('option', 'active');
-        
-        // #tab video
-        if (active == 2)  
+      
+      //stream number
+      if (id == "userinput_nmediastream")
+      {
+        if (first_click_video_tab != true)
         {
-          if(first_click)// first click
+          for (i=0;i<userinput_nvideomode;i++)
           {
-            first_click = false;
-            calCodec();
+            $("#default_tbody_mode"+i).find('tr').each(function(){
+              var stream_num = $(this).attr('id').substr($(this).attr('id').length - 1);
+              stream_num = parseInt(stream_num) + 1;
+            
+              if (stream_num > userinput_nmediastream)
+              {
+                $(this).remove();
+              }
+            
+            })
           }
         }
- 
-      }                                                                          
-    }); 
+      }
+    });
+    
+
     
   
     // when clicks video codec ...
     // note: unbind() is to make sure not be bound twice
     $(".codec").unbind('click').bind( "click", function() {
-      console.log(event.target);
+      //console.log(event.target);
       
-      console.log($(this).attr('id'));
+      //console.log($(this).attr('id'));
       if($(this).is(":checked"))
       {
         ncodec = ncodec + 1;
