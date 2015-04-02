@@ -371,6 +371,28 @@ function calCodec()
   })
 }
 
+function handleStream()
+{
+  for (i=0;i<userinput_nvideomode;i++)
+  {
+    var stream_num;
+    $("#default_tbody_mode"+i).find('tr').each(function(){
+      stream_num = $(this).attr('id').substr($(this).attr('id').length - 1);
+      stream_num = parseInt(stream_num) + 1;
+            
+      if (stream_num <= userinput_nmediastream)
+      {
+        $(this).show();
+      }
+      else
+      {
+        $(this).hide();
+      }
+    })
+            
+  }
+}
+
 function prepareTable()
 {
   // initial all tables
@@ -385,6 +407,8 @@ function prepareTable()
   {
     $("#div_videomode"+i).show();
   }
+  
+  handleStream();
 }
 
 function loadcurrentsetting()
@@ -448,25 +472,7 @@ $(document).ready(function(){
       {
         if (first_click_video_tab != true)
         {
-          for (i=0;i<userinput_nvideomode;i++)
-          {
-            var stream_num;
-            $("#default_tbody_mode"+i).find('tr').each(function(){
-              stream_num = $(this).attr('id').substr($(this).attr('id').length - 1);
-              stream_num = parseInt(stream_num) + 1;
-            
-              if (stream_num <= userinput_nmediastream)
-              {
-                $(this).show();
-              }
-              else
-              {
-                $(this).hide();
-              }
-
-            })
-            
-          }
+          handleStream();
         }
       }
     });
