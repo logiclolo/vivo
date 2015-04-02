@@ -10,29 +10,29 @@
 
     
     <br>
-    <div id="h265_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
-    <span style="width:295px">Maximun bitrate of H265 &nbsp:</span>
+    <div id="h265_maxbitrate" class="maxbitrate_div">
+    <span class="maxbitrate_span">Maximun bitrate of H265:</span>
     <%= f.text_field :videoin_c0_h265_maxbitrate, style: "width:120px" %>
     <span>(bps)</span>
     <br>
     </div>
     
-    <div id="h264_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
-    <span style="width:295px">Maximun bitrate of H264 &nbsp:</span>
+    <div id="h264_maxbitrate" class="maxbitrate_div">
+    <span class="maxbitrate_span">Maximun bitrate of H264:</span>
     <%= f.text_field :videoin_c0_h264_maxbitrate, style: "width:120px" %>
     <span>(bps)</span>
     <br>
     </div>
     
-    <div id="mjpeg_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
-    <span style="width:295px">Maximun bitrate of MJPEG :</span>
+    <div id="mjpeg_maxbitrate" class="maxbitrate_div">
+    <span class="maxbitrate_span">Maximun bitrate of MJPEG:</span>
     <%= f.text_field :videoin_c0_mjpeg_maxbitrate, style: "width:120px" %>
     <span>(bps)</span>
     <br>
     </div>
     
-    <div id="mpeg4_maxbitrate" style="display:none;margin-left:10px;padding-bottom:3px">
-    <span style="width:295px">Maximun bitrate of MPEG4 :</span>
+    <div id="mpeg4_maxbitrate" class="maxbitrate_div">
+    <span class="maxbitrate_span">Maximun bitrate of MPEG4:</span>
     <%= f.text_field :videoin_c0_mpeg4_maxbitrate, style: "width:120px" %>
     <span>(bps)</span>
     <br>
@@ -43,7 +43,7 @@
     <%= f.text_field :nvideomode, class: "params", style: "width:120px"%>
     <br>
     <br>
-    <%= f.label :resolution_fps, "Resolution and MaxFPS: " %>
+    <%#= f.label :resolution_fps, "Resolution and MaxFPS: " %>
     <br>
                     <!-- video mode 0 table (resolution)  -->
                     <div id="div_videomode0" class="div_videomode" style="display:none">
@@ -210,7 +210,7 @@
 															  <tr id="default_tablescroll_tr_mode0">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
-																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
+																  <th style="width: 110px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -478,7 +478,7 @@
 															  <tr id="default_tablescroll_tr_mode1">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
-																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
+																  <th style="width: 110px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
@@ -742,7 +742,7 @@
 															  <tr id="default_tablescroll_tr_mode2">
 																  <th style="width: 170px;"><span title="symbol">Default setting</span></th>
 																  <th style="width: 70px;"><span title="symbol" style="margin-left:10px">ePTZ</span></th>
-																  <th style="width: 100px;text-align: left"><span title="symbol" >Resolution</span></th>
+																  <th style="width: 110px;text-align: left"><span title="symbol" >Resolution</span></th>
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS</span></th> -->
 																  <!-- <th style="width: 70px;"><span title="symbol">Max FPS (under H264)</span></th>-->
 															  </tr>
